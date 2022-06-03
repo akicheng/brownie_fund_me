@@ -5,7 +5,7 @@ pragma solidity ^0.6.6;
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.6/vendor/SafeMathChainlink.sol";
 
-contract FundMe {
+contract FundMe_org {
     using SafeMathChainlink for uint256;
 
     mapping(address => uint256) public addressToAmountFunded;

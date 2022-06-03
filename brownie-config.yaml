@@ -6,6 +6,26 @@ compiler:
     remappings:
       - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
 dotenv: .env
+networks:
+  default: development
+  rinkeby:
+    eth_usd_price_feed: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e'
+    verify: True
+  #kovan:
+  #mainnet:
+  #goerli:
+  #ropsten:
+  development:
+    verify: False
+  ganache-local:
+    verify: False
 wallets:
   from_key:  ${PRIVATE_KEY}
   from_key2: ${PRIVATE_KEY2}
+httpprovider:
+  rinkeby: 
+    website: https://rinkeby.infura.io/v3/abadc6c834c5405db38243031cbaef6ebadc6c834c5405db38243031cbaef6e
+  ganache-local: 
+    website: http://127.0.0.1:7545
+  development:
+    website: http://127.0.0.1:8545

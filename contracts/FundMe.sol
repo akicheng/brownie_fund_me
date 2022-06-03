@@ -5,17 +5,21 @@ pragma solidity ^0.6.6;
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.6/vendor/SafeMathChainlink.sol";
 
+
 contract FundMe {
     using SafeMathChainlink for uint256;
 
     mapping(address => uint256) public addressToAmountFunded;
     address[] public funders;
     address public owner;
+
+    AggregatorV3Interface public priceFeed;
     
     // if you're following along with the freecodecamp video
     // Please see https://github.com/PatrickAlphaC/fund_me
     // to get the starting solidity contract code, it'll be slightly different than this!
-    constructor() public {
+    constructor(address _priceFeed) public {
+        priceFeed = AggregatorV3Interface(_priceFeed);
         owner = msg.sender;
     }
 
@@ -30,12 +34,10 @@ contract FundMe {
     }
 
     function getVersion() public view returns (uint256) {
-        AggregatorV3Interface priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
         return priceFeed.version();
     }
 
     function getPrice() public view returns (uint256) {
-        AggregatorV3Interface priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
         (, int256 answer, , , ) = priceFeed.latestRoundData();
         return uint256(answer * 10000000000);
     }
@@ -58,15 +60,15 @@ contract FundMe {
         uint256 precision = 1 * 10**18;
         // return (minimumUSD * precision) / price;
         // We fixed a rounding error found in the video by adding one!
-        return ((minimumUSD * precision) / price) + 1;
+        return ((minimumUSD * precision) / price) ;
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner);
+        require(msg.sender == owner,"you are not the onwer!");
         _;
     }
 
-    function withdraw() public payable onlyOwner {
+    function withdraw() public payable onlyOwner{
         msg.sender.transfer(address(this).balance);
 
         for (
@@ -78,5 +80,9 @@ contract FundMe {
             addressToAmountFunded[funder] = 0;
         }
         funders = new address[](0);
+    }
+
+    function getBal() public returns (uint256){
+        return address(this).balance;
     }
 }
