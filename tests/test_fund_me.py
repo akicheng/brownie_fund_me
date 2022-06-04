@@ -39,7 +39,7 @@ def test_other_withdraw():
 
     assert w3.eth.get_balance(str(fund_me)) != 0
 
-def test_only_onwer_can_withdraw():
+def test_only_owner_can_withdraw():
     #if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIROMENTS:
     if network.show_active() != "development":
         pytest.skip("not in local network! Only for local testing")

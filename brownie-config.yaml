@@ -11,6 +11,9 @@ networks:
   rinkeby:
     eth_usd_price_feed: '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e'
     verify: True
+  mainnet-fork-dev: 
+    eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'
+    verify: False
   #kovan:
   #mainnet:
   #goerli:
@@ -25,6 +28,8 @@ wallets:
 httpprovider:
   rinkeby: 
     website: https://rinkeby.infura.io/v3/abadc6c834c5405db38243031cbaef6ebadc6c834c5405db38243031cbaef6e
+  mainnet-fork-dev:
+    website: http://127.0.0.1:9545
   ganache-local: 
     website: http://127.0.0.1:7545
   development:

@@ -28,5 +28,5 @@ def main():
     ##0: contractr creater (owner)
     fund(0)
     fund(1)
-    fund(3)
+    fund(2)
     withdraw(0)
